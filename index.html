@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Ingol ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="fx-canvas"></canvas>
+
+  <!-- Curtain Transition Overlay -->
+  <div class="curtain-overlay" id="curtain-overlay" aria-hidden="true">
+    <div class="curtain-panel curtain-left"></div>
+    <div class="curtain-panel curtain-right"></div>
+    <div class="curtain-crest">✨ Ingol ✨</div>
+  </div>
+
+  <!-- Envelope Transition Overlay -->
+  <div class="envelope-overlay" id="envelope-overlay" aria-hidden="true">
+    <div class="env-transition-box">
+      <div class="env-back"></div>
+      <div class="env-letter-card">
+        <span>For Ingol 💌</span>
+      </div>
+      <div class="env-pocket"></div>
+      <div class="env-flap"></div>
+    </div>
+  </div>
+
+  <!-- Multi-Page Viewport -->
+  <main class="pages-viewport" id="pages-viewport">
+
+    <!-- PAGE 1: Candle Date Intro + Envelope Trigger -->
+    <section class="page active candle-stage" data-page="0">
+      <div class="candle-wrap" id="candle-trigger" role="button" tabindex="0" aria-label="Click on the date and make a wish">
+        <div class="flame" id="flame"></div>
+        <div class="wick"></div>
+        <div class="number-candle" id="age-number">23 NOV 2026</div>
+      </div>
+      <p class="hint-text" id="candle-hint">click on the date and make a wish</p>
+      <button class="envelope-trigger-btn" id="enter-site-btn" type="button" aria-label="Open envelope">
+        <span class="mini-env" aria-hidden="true">
+          <span class="mini-env-flap"></span>
+          <span class="mini-env-body">💌</span>
+        </span>
+      </button>
+    </section>
+
+    <!-- PAGE 2: Happy Birthday Shivani + Solo Ribbon (1.jpg to 6.jpg) -->
+    <section class="page hero-ribbon-stage" data-page="1">
+      <div class="hero-copy">
+        <h1>Happy<br />Birthday<br /><span class="name-accent">Shivani</span></h1>
+        <p>an awesome wish for an awesome person</p>
+      </div>
+
+      <div class="ribbon-track-wrap" id="ribbon-track-wrap">
+        <div class="ribbon-track" id="ribbon-track"></div>
+      </div>
+
+      <div class="page-footer-nav">
+        <button class="pill-btn ghost prev-page-btn" data-transition="envelope">← Back</button>
+        <button class="pill-btn primary next-page-btn" data-transition="curtain">Next →</button>
+      </div>
+    </section>
+
+    <!-- PAGE 3: Draggable Polaroid Board (7 Friend Group Photos) -->
+    <section class="page board-stage" data-page="2">
+      <div class="pinboard" id="pinboard">
+        <div class="polaroid-board-layer" id="polaroid-board-layer"></div>
+      </div>
+
+      <div class="page-footer-nav">
+        <button class="pill-btn ghost prev-page-btn" data-transition="curtain">← Back</button>
+        <button class="pill-btn primary next-page-btn" data-transition="envelope">Next 💌</button>
+      </div>
+    </section>
+
+    <!-- PAGE 4: Galaxy Page (Photos 14+, Star Shapes + Clickable Comets) -->
+    <section class="page space-stage" data-page="3">
+      <div class="section-header light-header">
+        <p>funny how even a nickname like Ingol ended up meaning so much more</p>
+      </div>
+
+      <div class="space-viewport" id="space-viewport">
+        <div class="stars-bg"></div>
+        <div class="meteor-layer" id="meteor-layer"></div>
+        <div class="star-nodes-layer" id="star-nodes-layer"></div>
+
+        <div class="star-photo-popup hidden" id="star-photo-popup">
+          <button class="close-modal" id="close-star-popup" aria-label="Close photo">✕</button>
+          <div class="star-popup-img-wrap">
+            <img id="star-popup-img" src="" alt="Star memory" />
+          </div>
+          <p class="star-popup-caption" id="star-popup-caption"></p>
+          <p class="star-popup-note" id="star-popup-note"></p>
+        </div>
+      </div>
+
+      <div class="secret-modal hidden" id="meteor-modal">
+        <div class="secret-card">
+          <button class="close-modal" id="close-meteor-modal" aria-label="Close note">✕</button>
+          <p id="meteor-modal-text"></p>
+        </div>
+      </div>
+
+      <div class="page-footer-nav">
+        <button class="pill-btn ghost prev-page-btn" data-transition="envelope">← Back</button>
+        <button class="pill-btn primary next-page-btn" data-transition="curtain">Next →</button>
+      </div>
+    </section>
+
+    <!-- PAGE 5: "didn't realise when we reached from here to here" (before.jpg & after.jpg) -->
+    <section class="page journey-stage" data-page="4">
+      <div class="section-header">
+        <h2>didn't realise when we reached from here to here</h2>
+      </div>
+
+      <div class="journey-shell">
+        <div class="journey-card">
+          <div class="scrap-photo-box" id="from-here-box"></div>
+          <div class="scrap-note" id="from-here-caption">Where it started ✨</div>
+        </div>
+
+        <div class="journey-arrow">→</div>
+
+        <div class="journey-card">
+          <div class="scrap-photo-box" id="to-here-box"></div>
+          <div class="scrap-note" id="to-here-caption">23 Nov 2026 🎂</div>
+        </div>
+      </div>
+
+      <div class="page-footer-nav">
+        <button class="pill-btn ghost prev-page-btn" data-transition="curtain">← Back</button>
+        <button class="pill-btn primary next-page-btn" data-transition="curtain">Next →</button>
+      </div>
+    </section>
+
+    <!-- PAGE 6 (Second Last Page): Cute Animated Mountain Cabin, River, Dog, Sunset & Couple -->
+    <section class="page dream-stage" data-page="5">
+      <div class="dream-scene-card" aria-label="Peaceful mountain cabin by a river at sunset with a couple and a dog">
+        <svg viewBox="0 0 800 430" class="dream-svg" role="img" aria-label="Animated mountain house sunset scene">
+          <defs>
+            <linearGradient id="sunsetSky" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#352961" />
+              <stop offset="35%" stop-color="#9e4770" />
+              <stop offset="68%" stop-color="#f28482" />
+              <stop offset="100%" stop-color="#f6bd60" />
+            </linearGradient>
+
+            <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fff8d6" stop-opacity="1" />
+              <stop offset="45%" stop-color="#ffd166" stop-opacity="0.85" />
+              <stop offset="100%" stop-color="#f28482" stop-opacity="0" />
+            </radialGradient>
+
+            <linearGradient id="riverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffcad4" />
+              <stop offset="45%" stop-color="#84a59d" />
+              <stop offset="100%" stop-color="#4a6fa5" />
+            </linearGradient>
+
+            <linearGradient id="mountainFar" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#6d597a" />
+              <stop offset="100%" stop-color="#355070" />
+            </linearGradient>
+
+            <linearGradient id="mountainNear" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#3d5a80" />
+              <stop offset="100%" stop-color="#293241" />
+            </linearGradient>
+          </defs>
+
+          <!-- Sunset Sky -->
+          <rect width="800" height="430" fill="url(#sunsetSky)" />
+
+          <!-- Twinkling Evening Stars -->
+          <g class="sky-stars">
+            <circle cx="110" cy="52" r="2" fill="#fff8e7" />
+            <circle cx="220" cy="36" r="1.6" fill="#fff8e7" />
+            <circle cx="640" cy="48" r="2.2" fill="#fff8e7" />
+            <circle cx="715" cy="78" r="1.5" fill="#fff8e7" />
+            <circle cx="490" cy="30" r="1.8" fill="#fff8e7" />
+          </g>
+
+          <!-- Glowing Setting Sun -->
+          <g class="setting-sun">
+            <circle cx="430" cy="195" r="95" fill="url(#sunGlow)" />
+            <circle cx="430" cy="195" r="42" fill="#fff3b0" />
+          </g>
+
+          <!-- Drifting Soft Clouds -->
+          <g class="cloud cloud-1" opacity="0.55">
+            <ellipse cx="180" cy="95" rx="52" ry="16" fill="#ffd6ba" />
+            <ellipse cx="215" cy="90" rx="38" ry="14" fill="#ffe5d9" />
+          </g>
+          <g class="cloud cloud-2" opacity="0.45">
+            <ellipse cx="610" cy="115" rx="58" ry="17" fill="#ffd6ba" />
+            <ellipse cx="575" cy="110" rx="36" ry="13" fill="#ffe5d9" />
+          </g>
+
+          <!-- Distant Birds Gliding -->
+          <g class="birds" fill="none" stroke="#4a314d" stroke-width="2" stroke-linecap="round">
+            <path d="M310 110 Q318 102 325 110 Q332 102 340 110" />
+            <path d="M352 124 Q358 118 363 124 Q368 118 374 124" />
+          </g>
+
+          <!-- Mountain Range (Back) -->
+          <polygon points="0,260 130,125 270,255 415,115 570,255 705,135 800,235 800,300 0,300" fill="url(#mountainFar)" />
+          <!-- Snow Caps -->
+          <polygon points="130,125 104,154 121,148 131,158 143,147 156,154" fill="#ffe5ec" opacity="0.8" />
+          <polygon points="415,115 385,148 403,142 416,153 430,141 445,148" fill="#ffe5ec" opacity="0.85" />
+          <polygon points="705,135 679,163 696,157 707,166 720,156 732,163" fill="#ffe5ec" opacity="0.8" />
+
+          <!-- Mountain Range (Front) -->
+          <polygon points="-20,280 95,175 235,285 520,285 655,170 820,285 820,320 -20,320" fill="url(#mountainNear)" />
+
+          <!-- Rolling Meadow Hills -->
+          <path d="M0,275 Q210,245 430,278 T800,268 L800,430 L0,430 Z" fill="#386641" />
+          <path d="M0,305 Q260,280 520,312 T800,298 L800,430 L0,430 Z" fill="#2b5334" />
+
+          <!-- Peaceful Winding River -->
+          <path d="M465,274 C445,295 515,315 470,342 C425,368 335,388 375,430 L545,430 C510,390 575,362 545,332 C518,306 492,290 485,274 Z" fill="url(#riverGrad)" />
+          <!-- Animated Water Ripples -->
+          <g class="river-ripples" stroke="#fff8e7" stroke-width="2" stroke-linecap="round" opacity="0.65">
+            <line x1="472" y1="312" x2="504" y2="312" />
+            <line x1="448" y1="354" x2="492" y2="354" />
+            <line x1="412" y1="396" x2="466" y2="396" />
+          </g>
+
+          <!-- Pine Trees -->
+          <g fill="#1b3a24">
+            <polygon points="62,285 82,222 102,285" />
+            <polygon points="56,305 82,242 108,305" />
+            <polygon points="118,292 134,242 150,292" />
+            <polygon points="695,288 716,220 737,288" />
+            <polygon points="688,310 716,242 744,310" />
+            <polygon points="748,298 765,248 782,298" />
+          </g>
+
+          <!-- Cozy Mountain House / Cabin -->
+          <g class="cabin">
+            <!-- Chimney -->
+            <rect x="242" y="198" width="16" height="34" rx="2" fill="#6d4c41" />
+            <!-- Rising Smoke Puffs -->
+            <circle class="smoke s1" cx="250" cy="190" r="6" fill="#fff8f0" />
+            <circle class="smoke s2" cx="254" cy="176" r="8" fill="#fff8f0" />
+            <circle class="smoke s3" cx="248" cy="160" r="10" fill="#fff8f0" />
+
+            <!-- Cabin Walls -->
+            <rect x="175" y="238" width="102" height="66" rx="4" fill="#8d5b4c" />
+            <!-- Roof -->
+            <polygon points="163,242 226,192 289,242" fill="#4a2c2a" />
+            <!-- Warm Glowing Windows -->
+            <rect class="cabin-window" x="190" y="254" width="22" height="22" rx="3" fill="#ffd166" />
+            <line x1="201" y1="254" x2="201" y2="276" stroke="#6d4c41" stroke-width="2" />
+            <line x1="190" y1="265" x2="212" y2="265" stroke="#6d4c41" stroke-width="2" />
+
+            <!-- Door -->
+            <rect x="232" y="262" width="22" height="42" rx="3" fill="#5c3a2e" />
+            <circle cx="249" cy="284" r="2" fill="#ffd166" />
+          </g>
+
+          <!-- Cute Couple Sitting Together Watching Sunset -->
+          <g class="couple" transform="translate(278, 316)">
+            <!-- Blanket -->
+            <ellipse cx="32" cy="44" rx="42" ry="10" fill="#f28482" opacity="0.9" />
+            <!-- Left Person -->
+            <circle cx="18" cy="10" r="8.5" fill="#ffcdb2" />
+            <path d="M10,9 Q18,-2 26,9 Q25,2 18,1 Q11,2 10,9 Z" fill="#2b2d42" />
+            <path d="M8,38 Q10,20 18,20 Q26,20 28,38 Z" fill="#457b9d" />
+            <!-- Right Person (Leaning slightly closer) -->
+            <circle cx="42" cy="12" r="8" fill="#ffcdb2" />
+            <path d="M34,11 Q42,0 50,12 Q52,20 48,25 L35,23 Q32,18 34,11 Z" fill="#1d1e2c" />
+            <path d="M32,38 Q34,21 42,21 Q50,21 52,38 Z" fill="#ff758f" />
+            <!-- Tiny Floating Heart Above Couple -->
+            <path class="couple-heart" d="M30,-6 C30,-10 24,-10 24,-6 C24,-2 30,2 30,4 C30,2 36,-2 36,-6 C36,-10 30,-10 30,-6 Z" fill="#ff4d88" />
+          </g>
+
+          <!-- Happy Little Dog Beside Them -->
+          <g class="dog" transform="translate(362, 336)">
+            <!-- Wagging Tail -->
+            <path class="dog-tail" d="M24,14 Q34,6 32,2" fill="none" stroke="#e09f3e" stroke-width="3.5" stroke-linecap="round" />
+            <!-- Body -->
+            <ellipse cx="15" cy="16" rx="11" ry="8" fill="#e09f3e" />
+            <!-- Legs -->
+            <rect x="8" y="20" width="3.5" height="8" rx="1.5" fill="#c9842b" />
+            <rect x="19" y="20" width="3.5" height="8" rx="1.5" fill="#c9842b" />
+            <!-- Head -->
+            <circle cx="7" cy="9" r="6.5" fill="#e09f3e" />
+            <!-- Floppy Ear -->
+            <ellipse cx="10" cy="10" rx="2.5" ry="4.5" fill="#9e5a16" />
+            <!-- Eye & Nose -->
+            <circle cx="4.5" cy="8" r="1.1" fill="#1d1e2c" />
+            <circle cx="1" cy="10" r="1.4" fill="#1d1e2c" />
+          </g>
+
+          <!-- Foreground Wildflowers -->
+          <g>
+            <circle cx="145" cy="368" r="3.5" fill="#ffd166" />
+            <circle cx="162" cy="378" r="3" fill="#ffcad4" />
+            <circle cx="595" cy="362" r="3.5" fill="#ffd166" />
+            <circle cx="622" cy="376" r="3" fill="#ffcad4" />
+          </g>
+        </svg>
+      </div>
+
+      <p class="dream-caption">hope we make it someday</p>
+
+      <div class="page-footer-nav">
+        <button class="pill-btn ghost prev-page-btn" data-transition="curtain">← Back</button>
+        <button class="pill-btn primary next-page-btn" data-transition="envelope">Next 💌</button>
+      </div>
+    </section>
+
+    <!-- PAGE 7 (Final Page): iPhone Chat Animation -->
+    <section class="page phone-stage" data-page="6">
+      <div class="iphone-frame">
+        <div class="dynamic-island"></div>
+        <div class="chat-header">
+          <div class="chat-avatar">I</div>
+          <div>
+            <div class="chat-name" id="chat-contact-name">ingol</div>
+            <div class="chat-status">23 Nov 2026</div>
+          </div>
+        </div>
+
+        <div class="chat-thread" id="chat-thread"></div>
+
+        <div class="chat-footer">
+          <button class="replay-chat-btn" id="replay-chat-btn">↻ Replay Chat</button>
+        </div>
+      </div>
+
+      <div class="page-footer-nav">
+        <button class="pill-btn ghost prev-page-btn" data-transition="envelope">← Back</button>
+        <button class="pill-btn primary" id="restart-all-btn">↻ Start Over</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="images.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
